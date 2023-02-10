@@ -31,6 +31,12 @@ namespace API.Controllers
             activity.Id = Id;
             return Ok(await Mediator.Send(new Edit.Command {Activity = activity}));
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteActivity(Guid Id)
+        {
+            return Ok(await Mediator.Send(new Delete.Command {Id = Id}));
+        }
     }
 }
 
