@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from "axios";
+import { resolve } from "path";
 import { Activity } from "../models/activity";
 
 axios.defaults.baseURL = "http://localhost:5000/api";
@@ -13,6 +14,23 @@ const requests = {
         axios.put<T>(url, body).then(responseBody),
     del: <T>(url: string) => axios.delete<T>(url).then(responseBody),
 };
+
+// CAN JUST USE CHROME NETWORK THROTTLING
+// const sleep = (delay: number) => {
+//     return new Promise((resolve) => {
+//         setTimeout(resolve, delay);
+//     });
+// };
+
+// axios.interceptors.response.use(async (response) => {
+//     try {
+//         await sleep(1);
+//         return response;
+//     } catch (error) {
+//         console.log(error);
+//         return await Promise.reject(error);
+//     }
+// });
 
 const Activities = {
     list: () => requests.get<Activity[]>("/activities"),
