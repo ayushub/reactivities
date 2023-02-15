@@ -12,9 +12,9 @@ export default observer(function ActivityDashboard(){
 
     useEffect(() => {
         loadActivities()
-      },[activityStore]);
+    },[activityStore]);
     
-      if (loadingInitial) return <LoadingComponents />
+    if (loadingInitial) return <LoadingComponents />
 
     return (
         <Grid>
