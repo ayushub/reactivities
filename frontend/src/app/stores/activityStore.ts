@@ -56,6 +56,7 @@ export default class ActivityStore {
                 this.setLoadingInitial(false);
             }
         }
+        return this.selectedActivity;
     };
 
     private getActivity = (id: string) => {
