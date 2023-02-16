@@ -17,8 +17,14 @@ dotnet ef migrations add InitialCreate -s API -p Persistence
 ```
 
 ## Running the project locally
+### Backend
 cd into the API folder and run
 ```
 dotnet watch --no-hot-reload
 ```
 
+### Frontend
+After [starting the backend](#backend), cd into the frontend folder and run
+```
+npm start
+```

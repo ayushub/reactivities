@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button, Form, Segment } from "semantic-ui-react";
 import LoadingComponents from "../../../app/layout/LoadingComponents";
@@ -10,27 +10,28 @@ import { v4 as uuid} from "uuid";
 
 export default observer(function ActivityForm() {
     const { activityStore} = useStore()
-    const { selectedActivity, createActivity, updateActivity,
+    const { createActivity, updateActivity,
         loading, loadActivity, loadingInitial } = activityStore
 
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const initialState: Activity = {
-        id: "",
-        title: "",
-        description: "",
-        category: "",
-        date: "",
-        city: "",
-        venue: ""
-    }
+    const initialState: Activity = useMemo(() => {
+        return {
+            id: "",
+            title: "",
+            description: "",
+            category: "",
+            date: "",
+            city: "",
+            venue: ""
+        }},[])
 
     const [activity, setActivity] = useState<Activity>(initialState)
 
     useEffect(() => {
         if (id) loadActivity(id).then((activity) => setActivity(activity ??= initialState))
-    },[id, loadActivity])
+    },[id, loadActivity, initialState])
 
     function handleSubmit(){
         if(!activity.id) {
